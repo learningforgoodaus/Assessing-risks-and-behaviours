@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessing Immediate Needs - Activity</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Brand Colours Palette
+           #C6B4D9 (Soft Lavender)
+           #513873 (Deep Purple)
+           #413659 (Midnight Purple)
+           #F2F2F2 (Off White/Grey)
+           #9C7F9D (Muted Rose)
+        */
+        :root {
+            --brand-lavender: #C6B4D9;
+            --brand-purple: #513873;
+            --brand-dark: #413659;
+            --brand-grey: #F2F2F2;
+            --brand-rose: #9C7F9D;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--brand-grey);
+            color: var(--brand-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(65, 54, 89, 0.15);
+            overflow: hidden;
+            border: 2px solid var(--brand-purple);
+        }
+
+        .header {
+            background-color: var(--brand-purple);
+            padding: 24px;
+            color: white;
+            text-align: center;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .reveal-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px; 
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--brand-lavender);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* The "Hidden" content (Secret) */
+        .secret-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+            text-align: center;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* The "Cover" (Sliding Door) */
+        .sliding-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: var(--brand-dark);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .sliding-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 44px; /* Hit area width */
+            z-index: 20;
+            cursor: ew-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+        }
+
+        /* The vertical bar line */
+        .sliding-handle::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--brand-lavender);
+        }
+
+        /* The circular knob handle */
+        .sliding-handle::after {
+            content: "↔";
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            background-color: var(--brand-lavender);
+            color: var(--brand-dark);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .sliding-handle:hover::after {
+            transform: scale(1.1);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .tag-danger { background-color: #fee2e2; color: #b91c1c; }
+        .tag-tech { background-color: #e0f2fe; color: #0369a1; }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: var(--brand-purple);
+            text-align: center;
+            padding: 15px;
+            background-color: var(--brand-grey);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Heading removed as requested -->
+
+        <div class="p-5 text-center">
+            <p class="text-gray-600 text-sm italic">Slide the handles to reveal risks and red flags</p>
+        </div>
+
+        <div class="activity-grid">
+            <!-- Card 1: Digital Monitoring -->
+            <div class="reveal-wrapper" id="techWrapper">
+                <div class="secret-content">
+                    <span class="tag tag-tech">Digital Safety Risks</span>
+                    <h2 class="text-lg font-bold mb-3" style="color: var(--brand-purple)">Tech & Monitoring</h2>
+                    <p class="text-sm leading-relaxed text-gray-700">
+                        Safety is compromised through technology. This includes a barrage of calls or texts requiring an immediate response to "prove" location, the use of tracking apps or GPS on phones and cars to monitor movements, and communication sabotage where perpetrators call the workplace repeatedly to disrupt work and maintain control.
+                    </p>
+                </div>
+                <div class="sliding-cover" id="techCover">
+                    <div class="px-4">
+                        <h3 class="text-xl mb-1">Technology</h3>
+                        <p class="font-normal opacity-80 text-xs">Digital Monitoring</p>
+                    </div>
+                </div>
+                <div class="sliding-handle" id="techHandle"></div>
+            </div>
+
+            <!-- Card 2: Behavioural Red Flags -->
+            <div class="reveal-wrapper" id="flagWrapper">
+                <div class="secret-content">
+                    <span class="tag tag-danger">Observable Red Flags</span>
+                    <h2 class="text-lg font-bold mb-3" style="color: var(--brand-purple)">Behavioural Signs</h2>
+                    <p class="text-sm leading-relaxed text-gray-700">
+                        Watch for sudden changes indicating a crisis. This includes acute panic or hypervigilance after a phone call, unexplained injuries often hidden by concealing clothing (like scarves in heat), and attendance sabotage where the perpetrator steals car keys, denies childcare, or prevents the employee from leaving home.
+                    </p>
+                </div>
+                <div class="sliding-cover" id="flagCover">
+                    <div class="px-4">
+                        <h3 class="text-xl mb-1">Behavioural</h3>
+                        <p class="font-normal opacity-80 text-xs">Physical Red Flags</p>
+                    </div>
+                </div>
+                <div class="sliding-handle" id="flagHandle"></div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            These signs indicate a physical safety crisis might be occurring NOW.
+        </div>
+    </div>
+
+    <script>
+        function setupRevealSlider(wrapperId, coverId, handleId) {
+            const wrapper = document.getElementById(wrapperId);
+            const cover = document.getElementById(coverId);
+            const handle = document.getElementById(handleId);
+
+            let isDragging = false;
+
+            function updateSlider(xPos) {
+                const rect = wrapper.getBoundingClientRect();
+                let offsetX = xPos - rect.left;
+                
+                // Constraints
+                offsetX = Math.max(0, Math.min(offsetX, rect.width));
+                
+                const percentage = (offsetX / rect.width) * 100;
+                
+                // Move handle (center it)
+                handle.style.left = `calc(${percentage}% - 22px)`;
+                // Slide cover
+                cover.style.width = `${100 - percentage}%`;
+                cover.style.left = `${percentage}%`;
+            }
+
+            // Initial State (fully covered)
+            updateSlider(wrapper.getBoundingClientRect().left);
+
+            // Desktop Events
+            handle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                updateSlider(e.clientX);
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch Events
+            handle.addEventListener('touchstart', (e) => {
+                isDragging = true;
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                updateSlider(e.touches[0].clientX);
+            });
+
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            // Click jump
+            wrapper.addEventListener('click', (e) => {
+                if (e.target === handle) return;
+                updateSlider(e.clientX);
+            });
+        }
+
+        window.onload = () => {
+            setupRevealSlider('techWrapper', 'techCover', 'techHandle');
+            setupRevealSlider('flagWrapper', 'flagCover', 'flagHandle');
+        };
+    </script>
+</body>
+</html>
